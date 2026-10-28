@@ -1,0 +1,28 @@
+{
+  "demo_kind": "synthetic_fictional_speech_with_manually_seeded_initial_draft",
+  "source_seconds": 9.72225,
+  "model": "openai/whisper-medium",
+  "device": "NVIDIA GeForce RTX 5090 Laptop GPU",
+  "input": "I took fifteen. We need more tomorrow.",
+  "candidate": "I, I did not take 15. I took 50. No, 51. We do not need more tomorrow.",
+  "revert_output": "I took fifteen. We need more tomorrow.",
+  "status": {
+    "candidate": "pending",
+    "raw_eos_verified": true,
+    "scripted_revert": "original_restored"
+  },
+  "verification_times": {
+    "timezone": "Asia/Taipei",
+    "approximate": true,
+    "host_gpu_probe": "2026-10-28 17:04",
+    "initial_cli_integration": "2026-10-28 17:09",
+    "hardened_scripted_accept_revert_export": "2026-10-28 17:14",
+    "raw_eos_cli_integration": "2026-10-28 17:20"
+  },
+  "limitations": [
+    "Initial draft errors were manually seeded, not naturally occurring ASR errors.",
+    "Decisions were scripted, not independent human quality acceptance.",
+    "One synthetic English case does not establish general accuracy or human-effort savings.",
+    "Current policy is a fixed baseline; LLM action policy and USB execution are not validated."
+  ]
+}

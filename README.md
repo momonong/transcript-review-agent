@@ -1,10 +1,54 @@
-# transcript-review-agent
+# Transcript Review Agent
 
-## Local prototype
+**An agent for the first review pass, downstream of compatible ASR drafts.**
 
-The repository now includes a runnable Python **fixed-policy baseline harness**, not a completed LLM agent. It imports bounded, time-aligned ASR drafts, checks the complete declared timeline for gap/overlap cues, records bounded tool actions, preserves original text, and supports reversible human decisions and transcript/audit export. Gaps are not proof of missing speech, overlaps may be legitimate, and unflagged text is never labelled correct. Prototype work does not establish the proposal's quality or efficiency benefits.
+Turn source audio and existing Whisper or task-specific ASR output into evidence-linked transcript revisions, reversible decisions, and usable review data.
 
-The core requires Python 3.11+ and no third-party packages. From the repository root, in PowerShell:
+**Current milestone:** a runnable fixed-policy prototype with real local GPU re-transcription and reversible decisions.
+
+## Initial result
+
+A **9.722-second fictional English recording**, synthesized with Windows SAPI, was checked with **Whisper medium on an RTX 5090 Laptop GPU**. The initial draft below contains **manually seeded errors**, rather than naturally occurring ASR errors.
+
+| Stage | Text | Evidence |
+|---|---|---|
+| Seeded input | `I took fifteen. We need more tomorrow.` | Manually introduced draft errors |
+| Real GPU candidate | `I, I did not take 15. I took 50. No, 51. We do not need more tomorrow.` | Actual local CUDA inference, offered as **pending** |
+| Scripted revert export | `I took fifteen. We need more tomorrow.` | Accept/revert path restored the original |
+
+In this case, the model output retained repetition, negation, and the spoken numbers. **20 tests pass**, including original preservation, decision consistency, source-path boundaries, and incomplete-generation handling.
+
+[Public result excerpt](docs/results/initial-gpu-result.json) · [Validation details and timestamps](docs/validation.md)
+
+```mermaid
+flowchart LR
+    A[ASR draft + source audio] --> B[Local GPU re-transcription]
+    B --> C[Pending candidate + evidence]
+    C --> D[Confirm or revert]
+    D --> E[Transcript + audit export]
+```
+
+The evidence has three levels: **fictional fixtures** exercise the review workflow, **real GPU inference** verifies the local model integration, and **human quality or effort benefits remain unmeasured**. The decisions above were scripted, not independent user quality acceptance. All demonstration content is synthetic and fictional, with no patient material.
+
+## Current status
+
+| Area | Status |
+|---|---|
+| Import, bounded checks, GPU tool, decisions, audit export | Working initial prototype |
+| Action selection | Fixed-policy baseline; LLM agent policy not implemented |
+| UGen300 USB | Candidate architecture, not tested |
+| Quality, human effort, end-to-end benefits | Evaluation planned, no efficacy claim |
+
+The target is less human review work at the same final quality. Medical research is the first proposed validation setting; interviews and other research recordings are compatible-input candidates requiring their own validation. See the [concept](docs/concept.md) and [prototype plan](docs/prototype-plan.md).
+
+## Run the local prototype
+
+Python 3.11+ is required. The core uses only the standard library.
+
+<details>
+<summary>Core quickstart: fictional fixture, review, accept, revert, export</summary>
+
+From the repository root in PowerShell:
 
 ```powershell
 $env:PYTHONPATH = "$PWD/src"
@@ -16,28 +60,44 @@ python -B -m transcript_review_agent export .local/reverted.json --out-dir .loca
 python -B -m unittest discover -s tests -v
 ```
 
-The fixture creates silent synthetic WAV audio and explicitly fictional evidence. It tests the review/audit workflow, **not speech recognition accuracy or a successful model run**. Outputs are exclusive-create and will refuse existing files. Use a new output path for another run. Pending, rejected and reverted items retain original text on export. The full original, candidates, evidence, tool trace and human decisions remain in `audit.json`.
+This fixture creates silent synthetic WAV audio and explicitly fictional evidence. It tests the review and audit workflow, not speech recognition. For another run, use new output paths: commands refuse to overwrite existing files. Pending, rejected and reverted items retain original text. The export includes `transcript.json`, `transcript.txt`, and the full `audit.json`.
 
-Input JSON requires `source.path` (relative to the input's directory or `--media-root`), `source.duration` in seconds, and unique segments with `id`, `start`, `end`, `text`. Keep any speaker metadata. Source traversal and symlinks escaping the media root are rejected. Defaults: JSON at most 2 MiB, source at most 512 MiB, duration at most 24 hours. The current coverage duration comes from declared input metadata, not an audio-content correctness check. Missing timestamps require an upstream alignment/import adapter.
+</details>
 
-An optional Transformers Whisper CUDA adapter accepts an **existing local checkpoint directory**. It uses `local_files_only=True`, float16 and explicit language/task, requires CUDA, and never downloads or falls back to CPU. Example in a separately verified torch/transformers runtime:
+<details>
+<summary>Optional real GPU re-transcription with an existing local checkpoint</summary>
+
+Use a Python interpreter from a separately verified torch/transformers CUDA environment. Pass an existing Transformers Whisper checkpoint directory explicitly:
 
 ```powershell
-python -B -m transcript_review_agent review path/to/input.json --whisper-model path/to/local/whisper-checkpoint --language zh --device cuda:0 --out .local/gpu-review.json --budget 2 --context 1.5
+$env:PYTHONPATH = "$PWD/src"
+python -B -m transcript_review_agent review path/to/input.json --whisper-model path/to/local/whisper-checkpoint --language en --device cuda:0 --out .local/gpu-review.json --budget 2 --context 1.5
 ```
 
-This adapter currently accepts mono 16 kHz PCM16 WAV only and checks the declared duration against actual WAV frames. Other media need explicit conversion. Each selected tool action decodes the exact target and, when requested, its wider context (at most two model generations). Only the exact-target hypothesis becomes a pending candidate. The context hypothesis remains separate evidence. Clips above 30 seconds fail explicitly. A legacy Whisper snapshot lacking language generation metadata uses explicit tokenizer-derived forced decoder IDs in memory, with the branch recorded in evidence. No cache files are changed.
+The adapter uses `local_files_only=True`, float16, and an explicit language/task. It requires CUDA and never downloads a model or falls back to CPU. The tested host checkpoint is Whisper medium; this does not validate Whisper Small on USB. Runtime packages and weights are not bundled. The dependency-free core lock does not reproduce the optional GPU environment.
 
-Target and context decodes must terminate with EOS before a pending candidate is offered. Missing EOS, including a possible token-limit truncation, becomes unresolved evidence and requires human review. EOS confirms decoding termination, not transcription accuracy.
+The current adapter accepts mono 16 kHz PCM16 WAV, verifies declared duration against WAV frames, and rejects clips above 30 seconds. Other media require explicit conversion. A tool action decodes the target and, when needed, its wider context, with at most two model generations. Only the target hypothesis becomes a pending candidate; context remains separate evidence. Target/context decoding must end with genuine EOS before a candidate is offered. Missing EOS requires human review, while EOS itself does not prove accuracy.
 
-Model-based action policy is not yet implemented: every current run is labelled `fixed_baseline`, not an LLM agent. A fixture run does not imply model inference, USB execution, deployment or efficiency benefits. See [prototype plan](docs/prototype-plan.md).
+</details>
 
-Use a Python interpreter from a separately verified CUDA environment for the optional adapter, and pass the model directory explicitly. Runtime packages and checkpoint weights are not bundled or automatically installed. The core has a dependency-free `uv.lock`; that lock does not reproduce the optional GPU environment. Supported-model listings and a host checkpoint are not proof of USB compatibility.
+<details>
+<summary>Input contract, preservation, and limitations</summary>
 
-Review/audit files contain an explicit absolute local source locator so saving a review in another directory does not silently reinterpret the original relative source path. Keep these files under ignored `.local/` or another private location. Original-document hashes, schema checks and decision replay reject inconsistent files; they do not provide cryptographic signatures. Early development review files missing these fields must be regenerated rather than silently repaired.
+Input JSON requires a relative `source.path`, `source.duration` in seconds, and unique segments with `id`, `start`, `end`, and `text`. Preserve speaker metadata when available. Missing timestamps require an explicit alignment adapter. Defaults are 2 MiB JSON, 512 MiB media, and 24 hours of declared source duration. See the versioned fictional manifests in `examples/`.
 
-Project documents: [concept](docs/concept.md), [prototype plan](docs/prototype-plan.md), and [validation](docs/validation.md).
+Timeline gaps and overlaps are cues, not error verdicts. Overlaps can be legitimate simultaneous speech. Unflagged text is never labelled correct. Tool failure or budget exhaustion returns work to human review.
 
-## Proposal materials
+Review/audit files preserve the original and contain an explicit local source locator for cross-directory use. Keep them in ignored `.local/` or another private location. Schema checks, hashes and decision-history replay reject inconsistent records; they are not digital signatures. Early development review files missing these fields must be regenerated rather than silently repaired.
 
-Local historical proposal drafts remain preserved in the existing proposal directory and are not included in the prototype source publication. They describe the design-stage status at preparation time. Current prototype status is documented above and in the project documents. NeuroAI experience and historical processing-time estimates are supporting background, not evidence of this agent's effectiveness. No NeuroAI code, patient data or private recordings are included in the prototype.
+No LLM action policy, reviewer UI, broader media conversion, missing-timestamp alignment, or USB adapter is implemented. No clinical diagnosis, assessment scoring, measured labor saving, or institutional approval is claimed.
+
+</details>
+
+## Project documents
+
+- [Concept and intended evaluation](docs/concept.md)
+- [Prototype implementation plan](docs/prototype-plan.md)
+- [Validation and engineering timestamps](docs/validation.md)
+- [Whitelisted initial GPU result](docs/results/initial-gpu-result.json)
+
+Local historical proposal drafts remain preserved and are not included in the prototype source publication. They describe the design-stage status when prepared. The new prototype contains no NeuroAI code, patient data, or private recordings.
