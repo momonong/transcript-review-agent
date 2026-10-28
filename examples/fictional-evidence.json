@@ -1,0 +1,7 @@
+{
+  "provenance": "fictional_fixture_not_model_output",
+  "evidence": {
+    "s1": {"text": "我、我沒有拿十五個。我拿了五十個。", "reason": "fictional seeded example with repetition, negation and number"},
+    "s2": {"text": "明天不用再補。", "reason": "fictional unchanged example, not verified correct"}
+  }
+}

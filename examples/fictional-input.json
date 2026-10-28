@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1",
+  "provenance": "fictional_harness_fixture_silent_audio_not_speech",
+  "source": {"path": "fictional.wav", "duration": 8},
+  "segments": [
+    {"id": "s1", "start": 0, "end": 3, "text": "我拿了十五個。", "speaker": "fictional-speaker"},
+    {"id": "s2", "start": 4, "end": 8, "text": "明天不用再補。", "speaker": "fictional-speaker"}
+  ]
+}
