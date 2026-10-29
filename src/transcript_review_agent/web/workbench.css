@@ -8,3 +8,15 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 .title-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.job-status{display:flex;gap:12px;align-items:center;padding:10px 12px;background:var(--raised);border-radius:6px;font-size:13px}.job-status[hidden]{display:none}.working-indicator{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none;animation:working 1s ease-in-out infinite alternate}.working-indicator[hidden]{display:none}@keyframes working{from{opacity:.35}to{opacity:1}}@media(prefers-reduced-motion:reduce){.working-indicator{animation:none}}@media(max-width:720px){.title-actions{max-width:120px}.title-actions button{min-height:40px}}
 .queue-toggle span{float:none;display:block;text-align:left;margin-top:4px;font-size:12px;line-height:1.5}
+.queue-toggle .queue-heading{font-size:14px;font-weight:600;color:var(--text);margin-top:0}
+.queue-item .queue-title{flex-direction:column;align-items:flex-start;gap:2px}
+.queue-title>span:last-child{font-size:12px;color:var(--muted)}
+.language-control{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.language-control select{font:inherit;font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--control);border-radius:6px;min-height:32px;padding:3px 8px}
+.language-control select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.local-label{margin-left:auto}.language-control{margin-left:0}
+.transcript h3 .candidate-heading{font-size:14px;font-weight:600;margin-left:0}
+.decision-inputs label>span:first-child{font-weight:500;color:var(--text)}
+.key-values dt{flex:0 1 36%}.key-values dd{flex:1;max-width:64%}
+@media(max-width:1100px){.local-label{display:none}.language-control{margin-left:auto}.topbar{gap:16px}.details-grid{grid-template-columns:1fr}.transcript h3>span{display:block;margin-left:0}.comparison .section-title{flex-wrap:wrap}}
+@media(max-width:720px){.topbar-scope{display:none}.language-control{margin-left:auto;gap:6px}.language-control>span{display:none}.language-control select{min-height:44px}.queue-toggle{min-height:44px}.comparison .section-title{align-items:flex-start}.key-values div{gap:12px}.transcript h3>span{display:inline}.transcript h3>span+span{margin-left:5px}}

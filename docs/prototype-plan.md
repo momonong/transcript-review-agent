@@ -1,6 +1,6 @@
 # Review prototype plan
 
-Implementation scope: local Python CLI, fictional fixtures, reversible human decisions, and optional explicitly configured GPU adapters. Preserve historical proposal files and unrelated worktree state. NeuroAI assets, automatic model downloads and service startup are outside this implementation scope. Git publication is managed separately.
+Implementation scope: local Python CLI, fictional fixtures, reversible human decisions, and optional explicitly configured GPU adapters. Preserve historical proposal files and unrelated worktree state. Protected external project assets, automatic model downloads and service startup are outside this implementation scope. Git publication is managed separately.
 
 This is the initial CLI plan. The later [interactive workbench plan](interactive-prototype-plan.zh-Hant.md) extends it with the explicitly authorized loopback app, local development tests and bounded LLM policy. Service startup restrictions above describe the initial stage, not the later authorized workbench.
 
