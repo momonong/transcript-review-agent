@@ -1,0 +1,268 @@
+{
+  "demo_kind": "synthetic_chinese_speech_with_manually_seeded_draft_errors",
+  "source": {
+    "audio_file": "src/transcript_review_agent/demo/source.wav",
+    "seconds": 27.3775,
+    "generator": "Windows SAPI",
+    "language": "zh",
+    "source_sha256": "7430f6efad2a52842a4a698851f829adf8faf79452d4d528625aa53697b16b8f"
+  },
+  "policy": {
+    "kind": "fixed_baseline",
+    "name": "bounded_context_baseline",
+    "llm_agent": false,
+    "max_tool_calls": 8,
+    "tool_calls_used": 4,
+    "context_seconds": 0.0,
+    "max_context_seconds": 6.0
+  },
+  "summary": {
+    "segments": 4,
+    "pending_candidates": 4,
+    "needs_human_review": 0,
+    "tool_calls": 4,
+    "llm_decisions": 0
+  },
+  "items": [
+    {
+      "segment_id": "s1",
+      "start": 0.0,
+      "end": 9.9549375,
+      "original_text": "我拿了十五份。明天需要再準備。",
+      "candidate_text": "我,我没有拿15份。我拿了50份。不对,是51份。明天不需要再准备。",
+      "status": "pending",
+      "reason": "candidate_differs",
+      "initial_status": "pending",
+      "evidence": [
+        {
+          "text": "我,我没有拿15份。我拿了50份。不对,是51份。明天不需要再准备。",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "我,我没有拿15份。我拿了50份。不对,是51份。明天不需要再准备。",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 35,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": null,
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 1,
+          "elapsed_seconds": 1.0509,
+          "candidate_scope": {
+            "start": 0.0,
+            "end": 9.9549375
+          },
+          "context_text": null,
+          "context_scope": {
+            "start": 0,
+            "end": 9.9549375
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 1
+        }
+      ]
+    },
+    {
+      "segment_id": "s2",
+      "start": 9.9549375,
+      "end": 13.221125,
+      "original_text": "今天的討論到這裡，謝謝。",
+      "candidate_text": "今天的討論到這裡,謝謝!",
+      "status": "pending",
+      "reason": "candidate_differs",
+      "initial_status": "pending",
+      "evidence": [
+        {
+          "text": "今天的討論到這裡,謝謝!",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "今天的討論到這裡,謝謝!",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 14,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": null,
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 1,
+          "elapsed_seconds": 0.235,
+          "candidate_scope": {
+            "start": 9.9549375,
+            "end": 13.221125
+          },
+          "context_text": null,
+          "context_scope": {
+            "start": 9.9549375,
+            "end": 13.221125
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 2
+        }
+      ]
+    },
+    {
+      "segment_id": "s3",
+      "start": 13.221125,
+      "end": 21.1341875,
+      "original_text": "先確認時間。最後再寄出通知。",
+      "candidate_text": "先確認時間會議改到星期五下午3點最後再寄出通知",
+      "status": "pending",
+      "reason": "candidate_differs",
+      "initial_status": "pending",
+      "evidence": [
+        {
+          "text": "先確認時間會議改到星期五下午3點最後再寄出通知",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "先確認時間會議改到星期五下午3點最後再寄出通知",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 27,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": null,
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 1,
+          "elapsed_seconds": 0.4091,
+          "candidate_scope": {
+            "start": 13.221125,
+            "end": 21.1341875
+          },
+          "context_text": null,
+          "context_scope": {
+            "start": 13.221125,
+            "end": 21.1341875
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 3
+        }
+      ]
+    },
+    {
+      "segment_id": "s4",
+      "start": 21.1341875,
+      "end": 27.3775,
+      "original_text": "這份資料只用於研究。我同意錄音，也同意公開。",
+      "candidate_text": "這份資料只用於研究。我同意錄音,但不同意公開。",
+      "status": "pending",
+      "reason": "candidate_differs",
+      "initial_status": "pending",
+      "evidence": [
+        {
+          "text": "這份資料只用於研究。我同意錄音,但不同意公開。",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "這份資料只用於研究。我同意錄音,但不同意公開。",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 29,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": null,
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 1,
+          "elapsed_seconds": 0.4393,
+          "candidate_scope": {
+            "start": 21.1341875,
+            "end": 27.3775
+          },
+          "context_text": null,
+          "context_scope": {
+            "start": 21.1341875,
+            "end": 27.3775
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 4
+        }
+      ]
+    }
+  ],
+  "trace": [
+    {
+      "action": "retranscribe",
+      "call": 1,
+      "segment_id": "s1",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 0.0,
+      "source_start": 0,
+      "source_end": 9.9549375,
+      "outcome": "hypothesis"
+    },
+    {
+      "action": "retranscribe",
+      "call": 2,
+      "segment_id": "s2",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 0.0,
+      "source_start": 9.9549375,
+      "source_end": 13.221125,
+      "outcome": "hypothesis"
+    },
+    {
+      "action": "retranscribe",
+      "call": 3,
+      "segment_id": "s3",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 0.0,
+      "source_start": 13.221125,
+      "source_end": 21.1341875,
+      "outcome": "hypothesis"
+    },
+    {
+      "action": "retranscribe",
+      "call": 4,
+      "segment_id": "s4",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 0.0,
+      "source_start": 21.1341875,
+      "source_end": 27.3775,
+      "outcome": "hypothesis"
+    }
+  ],
+  "limitations": [
+    "Routing outcomes are not transcript accuracy or labor-savings measurements.",
+    "Synthetic reading scripts are not independent human ground truth.",
+    "Initial draft errors were manually seeded; candidates retain original model output.",
+    "No matched agent-versus-baseline benefit study or USB test has been completed."
+  ]
+}

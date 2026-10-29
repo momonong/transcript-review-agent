@@ -18,19 +18,19 @@ Pending text retains the original. Automatically checked and human confirmed are
 
 ```mermaid
 flowchart LR
-    A[Compatible timed ASR draft and source] --> B[Host: bounded baseline review policy]
+    A[Compatible timed ASR draft and source] --> B[Host: fixed baseline or bounded LLM policy]
     B --> C[Host: optional Whisper CUDA tool]
     C --> D[Evidence and candidate revisions]
     B --> D
-    D --> E[Scriptable accept, reject, revert]
+    D --> E[Local reviewer UI: accept, reject, revert]
     E --> F[Transcript and full audit export]
     B -. proposed future adapter .-> U[UGen300 USB: compatible Whisper Small candidate]
     U -. hypotheses .-> D
 ```
 
-The runnable prototype is a standard-library CLI with a **fixed baseline policy**, an explicitly fictional offline evidence tool, and an optional real local Transformers Whisper CUDA tool. It is not a completed LLM agent. The current host GPU probe uses Whisper medium because an existing checkpoint was available. It does not establish Whisper Small compatibility on USB.
+The runnable prototype includes a standard-library CLI and a local Chinese review workbench. It offers a fixed baseline, a bounded Microsoft Phi-4-mini action policy, an explicitly fictional offline evidence tool, and a real local Transformers Whisper CUDA tool. The LLM can request target/context evidence or select an existing target hypothesis, but cannot accept changes on the reviewer's behalf. A four-segment synthetic Chinese run produced two pending candidates and two explicit policy-format handoffs. This is an engineering result, not proof that adaptation improves quality or human effort. The host uses Whisper medium and does not establish Whisper Small compatibility on USB.
 
-Model-based action selection, a reviewer UI, broader audio/video conversion, missing-timestamp alignment and a USB adapter are not implemented. The local host must satisfy its model/runtime requirements. USB memory does not guarantee compatibility or make an arbitrary weak host sufficient.
+Broader audio/video conversion, missing-timestamp alignment and a USB adapter are not implemented. The local host must satisfy its model/runtime requirements. USB memory does not guarantee compatibility or make an arbitrary weak host sufficient.
 
 ## Evidence needed for the product claim
 

@@ -250,6 +250,8 @@ def validate_review(review: dict) -> None:
     segments = review['original'].get('segments', [])
     if not isinstance(segments,list) or not isinstance(review.get('items'),list) or not isinstance(review.get('decisions'),list):
         raise ReviewInputError('invalid review arrays')
+    if not isinstance(review.get('trace'),list) or any(not isinstance(event,dict) for event in review['trace']):
+        raise ReviewInputError('invalid action trace entries')
     if len(review.get('items', [])) != len(segments):
         raise ReviewInputError('review/original segment count mismatch')
     states={}
@@ -269,7 +271,8 @@ def validate_review(review: dict) -> None:
             raise ReviewInputError('accepted item has no candidate')
         if item.get('initial_status') not in {'pending','needs_human_review'}:
             raise ReviewInputError('invalid initial review status')
-        if not isinstance(item.get('evidence'),list) or not isinstance(item.get('reason'),str):
+        if (not isinstance(item.get('evidence'),list) or any(not isinstance(row,dict) for row in item['evidence'])
+                or not isinstance(item.get('reason'),str)):
             raise ReviewInputError('invalid evidence or reason')
         states[s['id']]=item['initial_status']
         by_id[s['id']]=item

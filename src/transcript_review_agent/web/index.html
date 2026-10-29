@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>逐字稿查核｜Transcript Review Agent</title>
+<link rel="stylesheet" href="/assets/workbench.css">
+<script src="/assets/workbench.js" defer></script>
+</head>
+<body>
+<div class="app" data-ui>
+  <header class="topbar"><a class="brand" href="/" aria-label="Transcript Review Agent 首頁"><span class="brand-mark" aria-hidden="true">「」</span><span>Transcript Review</span></a><span class="topbar-scope">本機查核工作台</span><span class="local-label">僅本機連線</span></header>
+  <aside class="sidebar"><button class="queue-toggle" id="queue-toggle" type="button" aria-expanded="true">待查核段落 <span id="pending-count">—</span></button><div id="queue" class="queue" aria-label="段落清單"></div><div class="sidebar-note"><strong>原稿始終保留</strong><p>未標記不代表正確。工具候選需經人工決定，才能成為匯出文字。</p></div></aside>
+  <main class="sheet" id="main">
+    <div class="title-row"><div><h1>逐字稿查核</h1><p id="review-name">載入查核檔案…</p></div><div class="title-actions"><button id="run-review" type="button" hidden>執行查核</button><button class="quiet-button" id="refresh" type="button">重新載入</button></div></div>
+    <div class="notice" id="provenance">讀取本機資料與查核狀態…</div>
+    <div class="job-status" id="job-status" role="status" aria-live="polite" hidden><span class="working-indicator" id="working-indicator" aria-hidden="true"></span><div><p id="job-message"></p><p id="job-error" class="inline-error" hidden></p></div></div>
+    <section class="source-panel" aria-labelledby="source-title"><div class="section-title"><h2 id="source-title">原音與段落位置</h2><span class="meta" id="source-name">—</span></div><audio id="audio" controls preload="metadata" src="/media/source">此瀏覽器不支援音訊播放。</audio><div class="playback-row"><button id="play-segment" type="button">回聽這一段</button><button id="play-context" type="button">含前後文回聽</button><span id="segment-time" class="time-label">—</span></div><p class="inline-error" id="audio-error" hidden></p></section>
+    <section class="comparison" aria-labelledby="compare-title"><div class="section-title"><h2 id="compare-title">原稿與候選</h2><span class="status" id="segment-status">載入中</span></div><div class="transcript-columns"><article class="transcript original"><h3>匯入初稿</h3><p id="original-text" class="transcript-text">載入中…</p></article><article class="transcript candidate"><h3>工具候選 <span>原樣保留</span></h3><p id="candidate-text" class="transcript-text">載入中…</p></article></div><p class="diff-key">新增以底色標示，刪除以刪線標示；繁簡、重複、否定及數字不自動改寫。</p></section>
+    <section class="decision-panel" aria-labelledby="decision-title"><div class="section-title"><h2 id="decision-title">人工決策</h2><span class="meta" id="save-status">尚無新修訂</span></div><div class="decision-inputs"><label>查核者<input id="reviewer" maxlength="100" value="本機查核者" autocomplete="off"></label><label class="note-input">決策備註 <span>選填</span><input id="decision-note" maxlength="2000" placeholder="記錄採用或保留原稿的原因" autocomplete="off"></label></div><div class="decision-actions"><button class="primary" id="accept" type="button">採用候選</button><button id="reject" type="button">保留原稿</button><button class="text-button" id="revert" type="button">復原為原稿</button><span id="decision-message" role="status" aria-live="polite"></span></div><p class="inline-error" id="decision-error" hidden></p></section>
+    <div class="details-grid"><section class="evidence-panel" aria-labelledby="evidence-title"><div class="section-title"><h2 id="evidence-title">查核依據</h2><span class="meta" id="policy-name">—</span></div><dl id="evidence-summary" class="key-values"></dl><details><summary>工具 evidence 與 action trace</summary><pre id="evidence-json"></pre></details></section><section class="history-panel" aria-labelledby="history-title"><div class="section-title"><h2 id="history-title">決策紀錄</h2><span class="meta" id="decision-count">0 筆</span></div><ol id="decision-history" class="history"></ol></section></div>
+    <section class="export-panel" aria-labelledby="export-title"><div><h2 id="export-title">匯出可追溯資料</h2><p>未確認、保留或復原的段落，匯出仍使用原稿。audit 包含完整工具與決策紀錄。</p></div><div class="download-actions"><a class="button-link" href="/download/transcript.txt" download>逐字稿 TXT</a><a class="button-link" href="/download/transcript.json" download>逐字稿 JSON</a><a class="button-link" href="/download/audit.json" download>完整 audit</a></div></section>
+  </main>
+</div>
+<noscript>此本地工作台需要啟用 JavaScript；也可以使用 CLI 的 decide 與 export 命令。</noscript>
+</body></html>

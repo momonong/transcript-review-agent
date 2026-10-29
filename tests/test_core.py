@@ -137,5 +137,12 @@ class CoreTests(unittest.TestCase):
         r['decisions'][0]['segment_id']=[]
         with self.assertRaises(ReviewImportError):export_document(r)
 
+    def test_null_evidence_and_trace_are_rejected(self):
+        for field in ['evidence','trace']:
+            r=run_review(self.imported(),FixtureTool({'s1':{'text':'候選'}}))
+            if field=='evidence':r['items'][0]['evidence']=[None]
+            else:r['trace']=[None]
+            with self.assertRaises(ReviewImportError):export_document(r)
+
 
 if __name__=='__main__': unittest.main()

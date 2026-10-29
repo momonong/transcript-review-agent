@@ -2,6 +2,8 @@
 
 Implementation scope: local Python CLI, fictional fixtures, reversible human decisions, and optional explicitly configured GPU adapters. Preserve historical proposal files and unrelated worktree state. NeuroAI assets, automatic model downloads and service startup are outside this implementation scope. Git publication is managed separately.
 
+This is the initial CLI plan. The later [interactive workbench plan](interactive-prototype-plan.zh-Hant.md) extends it with the explicitly authorized loopback app, local development tests and bounded LLM policy. Service startup restrictions above describe the initial stage, not the later authorized workbench.
+
 1. Implement and test a standard-library core: bounded JSON/media import, full timeline coverage cues, explicit fixed baseline policy, tool-call budget and trace, pending review output, accept/reject/revert and transcript/audit export.
 2. Add a real Whisper CUDA adapter only for an explicitly supplied existing checkpoint and supported runtime. Reject unavailable CUDA, oversized context, unsupported media and runtime failures. No CPU fallback or automatic model download.
 3. Keep model-based policy separate from the fixed baseline. Any model policy must choose from bounded actions and record its identity and decisions. Fixture evidence must remain visibly fictional and offline.

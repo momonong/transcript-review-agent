@@ -227,3 +227,5 @@ __pycache__/
 *.mp4
 *.m4a
 *.flac
+.taste-skill/
+!src/transcript_review_agent/demo/source.wav

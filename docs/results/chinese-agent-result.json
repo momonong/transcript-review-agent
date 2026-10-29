@@ -1,0 +1,540 @@
+{
+  "demo_kind": "synthetic_chinese_speech_with_manually_seeded_draft_errors",
+  "source": {
+    "audio_file": "src/transcript_review_agent/demo/source.wav",
+    "seconds": 27.3775,
+    "generator": "Windows SAPI",
+    "language": "zh",
+    "source_sha256": "7430f6efad2a52842a4a698851f829adf8faf79452d4d528625aa53697b16b8f"
+  },
+  "policy": {
+    "kind": "llm_agent",
+    "llm_agent": true,
+    "model_id": "microsoft/Phi-4-mini-instruct",
+    "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+    "identity_verification": "sha256_verified_official_shards",
+    "weight_sha256": {
+      "model-00001-of-00002.safetensors": "bc703090b63eda16f639fa4de7ac54635c23105ab1da2f6ec4d3403151d38ee6",
+      "model-00002-of-00002.safetensors": "7ff79b9d2d31076bac2663393451f6530f4fc8ca49b09002116c92c373dba983"
+    },
+    "max_tool_calls": 8,
+    "max_llm_calls": 12,
+    "max_actions_per_segment": 4,
+    "max_context_seconds": 6,
+    "max_total_seconds": 120,
+    "hard_timeout_preemption": false,
+    "timeout_disclosure": "cooperative generation max_time plus elapsed checks; calls are not forcibly preempted",
+    "llm_calls_used": 8,
+    "tool_calls_used": 4,
+    "elapsed_seconds": 12.3569
+  },
+  "summary": {
+    "segments": 4,
+    "pending_candidates": 2,
+    "needs_human_review": 2,
+    "tool_calls": 4,
+    "llm_decisions": 8,
+    "review_loop_seconds": 12.3569,
+    "timing_excludes": [
+      "checkpoint hashing",
+      "model loading",
+      "human review"
+    ]
+  },
+  "items": [
+    {
+      "segment_id": "s1",
+      "start": 0.0,
+      "end": 9.9549375,
+      "original_text": "我拿了十五份。明天需要再準備。",
+      "candidate_text": null,
+      "status": "needs_human_review",
+      "initial_status": "needs_human_review",
+      "reason": "policy_failure",
+      "evidence": [
+        {
+          "text": "我,我没有拿15份。我拿了50份。不对,是51份。明天不需要再准备。",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "我,我没有拿15份。我拿了50份。不对,是51份。明天不需要再准备。",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 35,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 49,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 2,
+          "elapsed_seconds": 1.5621,
+          "candidate_scope": {
+            "start": 0.0,
+            "end": 9.9549375
+          },
+          "context_text": "我,我沒有拿15份。我拿了50份。不對,是51份。明天不需要再準備。今天的討論到這裡,謝謝。先確認時間。會議改",
+          "context_scope": {
+            "start": 0,
+            "end": 15.9549375
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 1
+        }
+      ]
+    },
+    {
+      "segment_id": "s2",
+      "start": 9.9549375,
+      "end": 13.221125,
+      "original_text": "今天的討論到這裡，謝謝。",
+      "candidate_text": null,
+      "status": "needs_human_review",
+      "initial_status": "needs_human_review",
+      "reason": "policy_failure",
+      "evidence": [
+        {
+          "text": "今天的討論到這裡,謝謝!",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "今天的討論到這裡,謝謝!",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 14,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 32,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 2,
+          "elapsed_seconds": 0.7187,
+          "candidate_scope": {
+            "start": 9.9549375,
+            "end": 13.221125
+          },
+          "context_text": "明天不需要再準備。今天的討論到這裡,謝謝。先確認時間。會議改到這裡。",
+          "context_scope": {
+            "start": 6.9549375,
+            "end": 16.221125
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 2
+        }
+      ]
+    },
+    {
+      "segment_id": "s3",
+      "start": 13.221125,
+      "end": 21.1341875,
+      "original_text": "先確認時間。最後再寄出通知。",
+      "candidate_text": "先確認時間會議改到星期五下午3點最後再寄出通知",
+      "status": "pending",
+      "initial_status": "pending",
+      "reason": "observed_candidate_selected",
+      "selected_evidence_index": 0,
+      "policy_reason": "target audio evidence for human review",
+      "evidence": [
+        {
+          "text": "先確認時間會議改到星期五下午3點最後再寄出通知",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "先確認時間會議改到星期五下午3點最後再寄出通知",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 27,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 50,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 2,
+          "elapsed_seconds": 1.2036,
+          "candidate_scope": {
+            "start": 13.221125,
+            "end": 21.1341875
+          },
+          "context_text": "今天的討論到這裡,謝謝!先確認時間。會議改到星期五下午3點。最後再寄出通知。這份資料只用於研究。",
+          "context_scope": {
+            "start": 10.221125,
+            "end": 24.1341875
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 3
+        }
+      ]
+    },
+    {
+      "segment_id": "s4",
+      "start": 21.1341875,
+      "end": 27.3775,
+      "original_text": "這份資料只用於研究。我同意錄音，也同意公開。",
+      "candidate_text": "這份資料只用於研究。我同意錄音,但不同意公開。",
+      "status": "pending",
+      "initial_status": "pending",
+      "reason": "observed_candidate_selected",
+      "selected_evidence_index": 0,
+      "policy_reason": "uncertainty in candidate's agreement to public release",
+      "evidence": [
+        {
+          "text": "這份資料只用於研究。我同意錄音,但不同意公開。",
+          "resolved": true,
+          "retryable": false,
+          "reason": "local model hypothesis; human confirmation required",
+          "target_text": "這份資料只用於研究。我同意錄音,但不同意公開。",
+          "target_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 29,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "context_termination": {
+            "complete": true,
+            "ended_with_eos": true,
+            "returned_token_count": 44,
+            "max_new_tokens": 224,
+            "reason": "eos"
+          },
+          "provenance": "real_local_model_inference",
+          "model": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+          "device": "cuda:0",
+          "dtype": "float16",
+          "language": "zh",
+          "task": "transcribe",
+          "generation_branch": "legacy_explicit_forced_decoder_ids",
+          "generation_calls": 2,
+          "elapsed_seconds": 1.1519,
+          "candidate_scope": {
+            "start": 21.1341875,
+            "end": 27.3775
+          },
+          "context_text": "會議改到星期五下午3點最後再寄出通知這份資料只用於研究我同意錄音但不同意公開",
+          "context_scope": {
+            "start": 15.1341875,
+            "end": 27.3775
+          },
+          "context_disclosure": "Context hypothesis covers a wider interval and never replaces the target segment automatically.",
+          "tool": "transformers_whisper_cuda",
+          "call": 4
+        }
+      ]
+    }
+  ],
+  "trace": [
+    {
+      "action": "policy_decision",
+      "segment_id": "s1",
+      "step": 1,
+      "call": 1,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "{\n  \"action\": \"retranscribe\",\n  \"context_seconds\": 6,\n  \"reason\": \"short reason\"\n}",
+      "input_tokens": 350,
+      "generated_tokens": 28,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 28,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "parsed_action": {
+        "action": "retranscribe",
+        "context_seconds": 6,
+        "reason": "short reason"
+      },
+      "outcome": "valid_action",
+      "elapsed_seconds": 1.4146
+    },
+    {
+      "action": "retranscribe",
+      "call": 1,
+      "segment_id": "s1",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 6,
+      "source_start": 0,
+      "source_end": 15.9549375,
+      "outcome": "hypothesis",
+      "elapsed_seconds": 1.5644
+    },
+    {
+      "action": "policy_decision",
+      "segment_id": "s1",
+      "step": 2,
+      "call": 2,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "```json\n{\n  \"action\": \"handoff\",\n  \"reason\": \"uncertainty in transcription and context\"\n}\n```",
+      "input_tokens": 529,
+      "generated_tokens": 28,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 28,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "outcome": "policy_failure",
+      "error_code": "invalid_action_json",
+      "exception_type": "PolicyError",
+      "elapsed_seconds": 0.9282
+    },
+    {
+      "action": "handoff",
+      "segment_id": "s1",
+      "reason": "policy_failure",
+      "elapsed_seconds": 3.9071
+    },
+    {
+      "action": "policy_decision",
+      "segment_id": "s2",
+      "step": 1,
+      "call": 3,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "{\n  \"action\": \"retranscribe\",\n  \"context_seconds\": 3,\n  \"reason\": \"short reason\"\n}",
+      "input_tokens": 412,
+      "generated_tokens": 28,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 28,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "parsed_action": {
+        "action": "retranscribe",
+        "context_seconds": 3,
+        "reason": "short reason"
+      },
+      "outcome": "valid_action",
+      "elapsed_seconds": 0.9096
+    },
+    {
+      "action": "retranscribe",
+      "call": 2,
+      "segment_id": "s2",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 3,
+      "source_start": 6.9549375,
+      "source_end": 16.221125,
+      "outcome": "hypothesis",
+      "elapsed_seconds": 0.7198
+    },
+    {
+      "action": "policy_decision",
+      "segment_id": "s2",
+      "step": 2,
+      "call": 4,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "```json\n{\n  \"action\": \"handoff\",\n  \"reason\": \"uncertainty in transcription and context\"\n}\n```",
+      "input_tokens": 563,
+      "generated_tokens": 28,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 28,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "outcome": "policy_failure",
+      "error_code": "invalid_action_json",
+      "exception_type": "PolicyError",
+      "elapsed_seconds": 0.9205
+    },
+    {
+      "action": "handoff",
+      "segment_id": "s2",
+      "reason": "policy_failure",
+      "elapsed_seconds": 6.457
+    },
+    {
+      "action": "policy_decision",
+      "segment_id": "s3",
+      "step": 1,
+      "call": 5,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "{\n  \"action\": \"retranscribe\",\n  \"context_seconds\": 3,\n  \"reason\": \"unclear text segment\"\n}",
+      "input_tokens": 417,
+      "generated_tokens": 30,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 30,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "parsed_action": {
+        "action": "retranscribe",
+        "context_seconds": 3,
+        "reason": "unclear text segment"
+      },
+      "outcome": "valid_action",
+      "elapsed_seconds": 0.9704
+    },
+    {
+      "action": "retranscribe",
+      "call": 3,
+      "segment_id": "s3",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 3,
+      "source_start": 10.221125,
+      "source_end": 24.1341875,
+      "outcome": "hypothesis",
+      "elapsed_seconds": 1.2058
+    },
+    {
+      "action": "policy_decision",
+      "segment_id": "s3",
+      "step": 2,
+      "call": 6,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "{\"action\":\"choose_evidence\",\"index\":0,\"reason\":\"target audio evidence for human review\"}",
+      "input_tokens": 582,
+      "generated_tokens": 21,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 21,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "parsed_action": {
+        "action": "choose_evidence",
+        "index": 0,
+        "reason": "target audio evidence for human review"
+      },
+      "outcome": "valid_action",
+      "elapsed_seconds": 0.744
+    },
+    {
+      "action": "policy_decision",
+      "segment_id": "s4",
+      "step": 1,
+      "call": 7,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "{\"action\":\"retranscribe\",\"context_seconds\":6,\"reason\":\"short reason\"}",
+      "input_tokens": 353,
+      "generated_tokens": 18,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 18,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "parsed_action": {
+        "action": "retranscribe",
+        "context_seconds": 6,
+        "reason": "short reason"
+      },
+      "outcome": "valid_action",
+      "elapsed_seconds": 0.6095
+    },
+    {
+      "action": "retranscribe",
+      "call": 4,
+      "segment_id": "s4",
+      "tool": "transformers_whisper_cuda",
+      "context_seconds": 6,
+      "source_start": 15.1341875,
+      "source_end": 27.3775,
+      "outcome": "hypothesis",
+      "elapsed_seconds": 1.1534
+    },
+    {
+      "action": "policy_decision",
+      "segment_id": "s4",
+      "step": 2,
+      "call": 8,
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "raw_action": "{\n  \"action\": \"choose_evidence\",\n  \"index\": 0,\n  \"reason\": \"uncertainty in candidate's agreement to public release\"\n}",
+      "input_tokens": 509,
+      "generated_tokens": 35,
+      "termination": {
+        "complete": true,
+        "ended_with_eos": true,
+        "returned_token_count": 35,
+        "max_new_tokens": 192,
+        "reason": "eos",
+        "max_time_seconds": 20.0,
+        "hard_timeout_preemption": false
+      },
+      "parsed_action": {
+        "action": "choose_evidence",
+        "index": 0,
+        "reason": "uncertainty in candidate's agreement to public release"
+      },
+      "outcome": "valid_action",
+      "elapsed_seconds": 1.2167
+    }
+  ],
+  "limitations": [
+    "Routing outcomes are not transcript accuracy or labor-savings measurements.",
+    "Synthetic reading scripts are not independent human ground truth.",
+    "Initial draft errors were manually seeded; candidates retain original model output.",
+    "No matched agent-versus-baseline benefit study or USB test has been completed."
+  ]
+}
